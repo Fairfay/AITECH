@@ -4,11 +4,12 @@
   display: flex;
   align-items: center;
   height: 100%; /* Убедимся, что контент занимает всю высоту родителя */
-  animation: marquee 10s linear infinite; /* Увеличена скорость */
+  animation: marquee 6.67s linear infinite; /* Увеличена скорость */
   white-space: nowrap;
   font-size: 48px;
   font-weight: bold;
   color: #000;
+  will-change: transform; /* Добавлено для оптимизации анимации */
 }
 
 .marquee-content span {

@@ -1,5 +1,6 @@
 src/
 ├── assets/
+│   └── svg/
 ├── components/
 │   ├── layout/
 │   │   ├── Header.tsx
@@ -146,9 +147,10 @@ const Header = () => {
                  <a href="#hero" onClick={(e) => handleScroll(e, "#hero")} className="self-start mb-12 mt-4"><LogoTag /></a>
               </SheetHeader>
               <div className="flex flex-col gap-6 text-xl font-medium">
+                {/* Меняем местами О нас и Услуги */}
                 <a href="#team" onClick={(e) => handleScroll(e, "#team")}>О нас</a>
-                <a href="#portfolio" onClick={(e) => handleScroll(e, "#portfolio")}>Портфолио</a>
                 <a href="#services" onClick={(e) => handleScroll(e, "#services")}>Услуги</a>
+                <a href="#portfolio" onClick={(e) => handleScroll(e, "#portfolio")}>Портфолио</a>
                 <a href="#blog" onClick={(e) => handleScroll(e, "#blog")}>Блог</a>
                 <a href="#contacts" onClick={(e) => handleScroll(e, "#contacts")}>Контакты</a>
               </div>
@@ -166,6 +168,7 @@ const Header = () => {
        <nav className="container mx-auto flex items-center justify-between py-4">
          {/* ... (код десктопного хедера без изменений) ... */}
           <div className="flex items-center gap-2">
+            {/* Меняем местами О нас и Услуги */}
             <Button variant="pill" asChild><a href="#team" aria-label="О нас" onClick={(e) => handleScroll(e, "#team")}>О нас</a></Button>
             <Button variant="pill" asChild><a href="#services" aria-label="Услуги" onClick={(e) => handleScroll(e, "#services")}>Услуги</a></Button>
             <Button variant="pill" asChild><a href="#blog" aria-label="Блог" onClick={(e) => handleScroll(e, "#blog")}>Блог</a></Button>
@@ -292,16 +295,17 @@ import claudeImgClean from "@/assets/claude.png";
 import deeplImg from "@/assets/deepl.jpg";
 
 const posts = [
-  { title: "Perplexity — поиск ИИ-ответов", href: "https://www.perplexity.ai", date: "01.01.2025", tag: "ИИ", desc: "Поиск и ответы с использованием искусственного интеллекта", image: perplexityImg, big: true },
-  { title: "DeepSeek — глубокий поиск", href: "https://deepseek.com", date: "01.01.2025", tag: "ИИ", desc: "Продвинутая аналитика и поиск по данным", image: deepImg },
-  { title: "Lovable — no-code платформа", href: "https://lovable.dev", date: "01.01.2025", tag: "ИИ", desc: "Быстрое создание приложений без кода", image: lovableImgClean },
-  { title: "Cursor — AI-редактор кода", href: "https://cursor.com", date: "01.01.2025", tag: "ИИ", desc: "Интеллектуальный редактор кода с поддержкой ИИ", image: cursorImgClean },
-  { title: "Claude — длинный контекст", href: "https://claude.ai", date: "01.01.2025", tag: "ИИ", desc: "Модель для рассуждений и обработки длинных текстов", image: claudeImgClean },
-  { title: "DeepL — переводчик ИИ", href: "https://deepl.com", date: "01.01.2025", tag: "ИИ", desc: "Мощный переводчик с искусственным интеллектом", image: deeplImg }
+  // Удалена дата из объектов постов
+  { title: "Perplexity — поиск ИИ-ответов", href: "https://www.perplexity.ai", tag: "ИИ", desc: "Поиск и ответы с использованием искусственного интеллекта", image: perplexityImg, big: true },
+  { title: "DeepSeek — глубокий поиск", href: "https://deepseek.com", tag: "ИИ", desc: "Продвинутая аналитика и поиск по данным", image: deepImg },
+  { title: "Lovable — no-code платформа", href: "https://lovable.dev", tag: "ИИ", desc: "Быстрое создание приложений без кода", image: lovableImgClean },
+  { title: "Cursor — AI-редактор кода", href: "https://cursor.com", tag: "ИИ", desc: "Интеллектуальный редактор кода с поддержкой ИИ", image: cursorImgClean },
+  { title: "Claude — длинный контекст", href: "https://claude.ai", tag: "ИИ", desc: "Модель для рассуждений и обработки длинных текстов", image: claudeImgClean },
+  { title: "DeepL — переводчик ИИ", href: "https://deepl.com", tag: "ИИ", desc: "Мощный переводчик с искусственным интеллектом", image: deeplImg }
 ];
 
 const Blog = () => (
-  <section id="blog" className="py-16 md:py-24">
+  <section id="blog" className="py-16 md:py-24 scroll-mt-[50px]"> {/* Добавлен scroll-mt-[50px] */}
     <div className="container mx-auto px-4">
       <div className="flex flex-col md:flex-row items-center md:items-start justify-between gap-6 mb-8 text-center md:text-left">
         <h2 className="text-display text-5xl md:text-7xl font-extrabold text-[#c6ff00]">блог</h2>
@@ -327,7 +331,8 @@ const Blog = () => (
             <div className="absolute inset-0 p-4 z-20 flex flex-col bg-black/40">
               <div className="flex items-center gap-3 text-sm mb-2">
                 <span className="px-3 py-1 rounded-full bg-black/50">{p.tag}</span>
-                <span className="text-white/80">{p.date}</span>
+                {/* Удалена строка с датой */}
+                {/* <span className="text-white/80">{p.date}</span> */} 
                 {/* Стрелка видна всегда, но анимируется при ховере */}
                 <ArrowUpRight className="ml-auto text-white transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
               </div>
@@ -373,7 +378,11 @@ export default Blog;
 ----------------------------
 // src/components/sections/CTA.tsx
 
-import { Send, MessageCircle } from "lucide-react";
+// Импортируем новые SVG иконки
+import TelegramIcon from "@/assets/svg/telegram.svg";
+import WhatsappIcon from "@/assets/svg/whatsapp.svg";
+// Удаляем импорты Lucide иконок, так как они больше не используются здесь
+
 import { useOrder } from "@/context/OrderContext";
 
 const CTA = () => {
@@ -401,25 +410,30 @@ const CTA = () => {
           <br />
           в свой бизнес
         </h2>
-        <p className="mt-4 text-lg text-black">+7 985-555-17-79</p>
+        {/* Увеличиваем размер текста номера телефона */}
+        <p className="mt-4 text-xl md:text-2xl text-black">+7 985-555-17-79</p> 
         <div className="flex justify-center gap-4 mt-4">
           <a
             href="https://t.me/ai_tech_llc"
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Telegram"
-            className="bg-black hover:bg-[#5940FE] text-white p-3 rounded-full transition-colors"
+            // Стили для кнопок соцсетей
+            className="rounded-full p-4 transition-colors duration-300 bg-transparent hover:bg-[#5940FE] group"
           >
-            <Send size={20} />
+            {/* Используем новую иконку Telegram. size-8 для увеличения, group-hover:invert для белого цвета при наведении */}
+            <img src={TelegramIcon} alt="Telegram" className="size-8 transition-colors duration-300 group-hover:invert" />
           </a>
           <a
             href="https://wa.me/79855551779"
             target="_blank"
             rel="noopener noreferrer"
             aria-label="WhatsApp"
-            className="bg-black hover:bg-[#5940FE] text-white p-3 rounded-full transition-colors"
+            // Стили для кнопок соцсетей
+            className="rounded-full p-4 transition-colors duration-300 bg-transparent hover:bg-[#5940FE] group"
           >
-            <MessageCircle size={20} />
+            {/* Используем новую иконку WhatsApp. size-8 для увеличения, group-hover:invert для белого цвета при наведении */}
+            <img src={WhatsappIcon} alt="WhatsApp" className="size-8 transition-colors duration-300 group-hover:invert" />
           </a>
         </div>
       </section>
@@ -432,14 +446,16 @@ const CTA = () => {
                     <a href="#services" onClick={(e) => handleScroll(e, "#services")} className="hover:underline">Услуги</a>
                     <a href="#team" onClick={(e) => handleScroll(e, "#team")} className="hover:underline">О нас</a>
                     <a href="#portfolio" onClick={(e) => handleScroll(e, "#portfolio")} className="hover:underline">Портфолио</a>
-                    <a href="#blog" onClick={(e) => handleScroll(e, "#blog")} className="hover:underline">Блог</a>
+                    <a href="#blog" onClick={(e) => handleScroll(e, "#blog")}>Блог</a>
                 </div>
                 <div className="flex flex-col gap-3">
                     <span className="text-xl font-bold">© 2025 ЭйАй Тех</span>
-                    <a href="https://эйайтех.рф" target="_blank" rel="noopener noreferrer" className="hover:underline">ИИ в медицине</a>
+                    {/* Исправлен редирект на itm-ai.ru */}
+                    <a href="https://itm-ai.ru" target="_blank" rel="noopener noreferrer" className="hover:underline">ИИ в медицине</a>
                     <a href="https://www.meshalkin.ru/" target="_blank" rel="noopener noreferrer" className="hover:underline">Клиника Мешалкина</a>
                 </div>
-                <a href="/policy.pdf" download className="hover:underline">
+                {/* Удален download атрибут */}
+                <a href="/policy.pdf" target="_blank" rel="noopener noreferrer" className="hover:underline">
                     Политика конфиденциальности
                 </a>
             </div>
@@ -448,7 +464,8 @@ const CTA = () => {
                 <a href="#hero" onClick={(e) => handleScroll(e, "#hero")} className="text-lg font-bold hover:underline">
                   © 2025 ЭйАй Тех
                 </a>
-                <a href="https://эйайтех.рф" target="_blank" rel="noopener noreferrer" className="text-sm hover:underline">
+                {/* Исправлен редирект на itm-ai.ru */}
+                <a href="https://itm-ai.ru" target="_blank" rel="noopener noreferrer" className="text-sm hover:underline">
                   ИИ в медицине
                 </a>
                  <a href="https://www.meshalkin.ru/" target="_blank" rel="noopener noreferrer" className="text-sm hover:underline">
@@ -459,10 +476,11 @@ const CTA = () => {
                 <a href="#services" onClick={(e) => handleScroll(e, "#services")} className="hover:underline">Услуги</a>
                 <a href="#team" onClick={(e) => handleScroll(e, "#team")} className="hover:underline">О нас</a>
                 <a href="#portfolio" onClick={(e) => handleScroll(e, "#portfolio")} className="hover:underline">Портфолио</a>
-                <a href="#blog" onClick={(e) => handleScroll(e, "#blog")} className="hover:underline">Блог</a>
+                <a href="#blog" onClick={(e) => handleScroll(e, "#blog")}>Блог</a>
               </div>
               <div className="w-full flex flex-col items-start md:items-end gap-4">
-                 <a href="/policy.pdf" download className="text-sm hover:underline">
+                 {/* Удален download атрибут */}
+                 <a href="/policy.pdf" target="_blank" rel="noopener noreferrer" className="text-sm hover:underline">
                   Политика конфиденциальности
                 </a>
                 <button onClick={open} className="bg-[#d4ff00] hover:bg-[#5940FE] text-black font-bold px-6 py-3 rounded-full transition-colors w-auto">
@@ -494,7 +512,7 @@ const faqs = [
   },
   {
     q: "Кто наши клиенты?",
-    a: "Мы работаем с компаниями разного масштаба: от стартапов до корпораций и государственных структур."
+    a: "Мы работаем с компаниями разного масштаба: от стартапов до корпораций и государственных структур. Наши клиенты включают компании из сфер: Финансы, Ритейл и E-commerce, Здравоохранение и медицина, Промышленность и строительство, Телеком, Маркетинг и Реклама." // Добавлен текст
   },
   {
     q: "Как мне стать вашим клиентом или стратегическим партнёром?",
@@ -504,7 +522,7 @@ const faqs = [
 
 const FAQ = () => {
   return (
-    <section id="faq" className="py-16 md:py-24">
+    <section id="faq" className="py-16 md:py-24 scroll-mt-[50px]"> {/* Добавлен scroll-mt-[50px] */}
       <div className="container mx-auto px-4">
         <h2 className="text-6xl md:text-8xl font-extrabold text-[#c6ff00] mb-12 text-center">
           FAQ
@@ -563,11 +581,12 @@ export default FAQ;
   display: flex;
   align-items: center;
   height: 100%; /* Убедимся, что контент занимает всю высоту родителя */
-  animation: marquee 15s linear infinite;
+  animation: marquee 6.67s linear infinite; /* Увеличена скорость */
   white-space: nowrap;
   font-size: 48px;
   font-weight: bold;
   color: #000;
+  will-change: transform; /* Добавлено для оптимизации анимации */
 }
 
 .marquee-content span {
@@ -613,7 +632,7 @@ const Hero = () => {
   const background = isMobile ? bgImageMobile : bgImage;
 
   return (
-    <section id="hero" className="relative h-screen min-h-[700px] pt-[80px] overflow-hidden bg-cover bg-center text-white" style={{ backgroundImage: `url(${background})`, backgroundAttachment: isMobile ? "fixed" : "scroll" }}>
+    <section id="hero" className="relative h-screen min-h-[700px] pt-[80px] overflow-hidden bg-cover bg-center text-white scroll-mt-[50px]" style={{ backgroundImage: `url(${background})`, backgroundAttachment: isMobile ? "fixed" : "scroll" }}>
         
         <div className="absolute w-[85%] max-w-[300px] text-center text-base leading-tight 
           top-[33vh] left-1/2 -translate-x-1/2
@@ -758,7 +777,7 @@ const Offerings = () => {
   };
 
   return (
-    <section id="services" className="py-16 md:py-24 bg-[#0F0F0F] relative">
+    <section id="services" className="py-16 md:py-24 bg-[#0F0F0F] relative scroll-mt-[50px]"> {/* Добавлен scroll-mt-[50px] */}
       <div className="container mx-auto px-4">
         <div className="flex justify-between items-center mb-12">
           <h2 className="text-4xl md:text-7xl font-extrabold text-[#DBFE01]">
@@ -900,7 +919,8 @@ export default function Portfolio() {
     <section
       id="portfolio"
       className="py-16 md:py-24"
-      style={{ scrollMarginTop: "100px" }}
+      // Уменьшен scrollMarginTop для лучшего позиционирования
+      style={{ scrollMarginTop: "50px" }} 
     >
       <div className="container mx-auto px-4">
         {/* Заголовок и подзаголовок */}
@@ -942,22 +962,25 @@ export default function Portfolio() {
   font-family: 'Unbounded', sans-serif;
 }
 
-/* Стили для плавно раскрывающегося контента */
+/* Стили для плавно раскрывающегося контента 
 .content-wrapper {
   display: grid;
-  grid-template-rows: 0fr; /* Начальная высота 0 */
-  /* Увеличиваем длительность анимации */
+  grid-template-rows: 0fr;
   transition: grid-template-rows 0.5s ease-in-out;
 }
+*/
 
+/*
 .content-wrapper.open {
-  grid-template-rows: 1fr; /* Конечная высота, чтобы вместить контент */
+  grid-template-rows: 1fr;  Конечная высота, чтобы вместить контент 
 }
+*/
 
-/* Это заставит дочерний элемент правильно сжиматься и расширяться */
+/* Это заставит дочерний элемент правильно сжиматься и расширяться 
 .content-wrapper > div {
     overflow: hidden;
 }
+*/
 
 ==================================================
 
@@ -975,67 +998,96 @@ import denisPhoto from "../../assets/denis.jpg";
 import womanEyes from "../../assets/woman-glaza.png";
 import womanPhoto from "../../assets/woman.jpg";
 
-const teamMembers = [
+const teamMembersData = [ // Переименовал, чтобы избежать конфликта
     { name: "Малхази", role: "Генеральный директор", description: "Отвечает за стратегию и развитие компании", eyes: directorEyes, photo: directorPhoto },
     { name: "Денис", role: "Технический директор", description: "Руководит техническим развитием и архитектурой", eyes: denisEyes, photo: denisPhoto },
     { name: "Галина", role: "Креативный дизайнер", description: "Создаёт визуальный стиль и UX/UI каждого продукта", eyes: womanEyes, photo: womanPhoto },
 ];
 
-const TeamMemberCard = ({ member }: { member: typeof teamMembers[0] }) => {
-  const [isExpanded, setIsExpanded] = useState(false);
+interface TeamMemberProps {
+    member: typeof teamMembersData[0];
+    index: number; // Для шахматного порядка на десктопе
+}
 
-  const handleToggle = () => setIsExpanded(prev => !prev);
+const TeamMemberCard: React.FC<TeamMemberProps> = ({ member, index }) => {
+  const [isExpanded, setIsExpanded] = useState(false);
+  const isOdd = index % 2 !== 0; // Для шахматного порядка
+
+  const handleClick = () => setIsExpanded(prev => !prev);
 
   return (
     <div
-      className="team-card-wrapper rounded-2xl transition-all duration-500 ease-in-out border-2 cursor-pointer overflow-hidden"
-      onMouseEnter={() => setIsExpanded(true)}
-      onMouseLeave={() => setIsExpanded(false)}
-      onClick={handleToggle}
-      style={{ borderColor: isExpanded ? '#c6ff00' : 'rgb(55 65 81)' }}
+      className={`team-card-wrapper rounded-2xl border-2 transition-colors duration-300 cursor-pointer overflow-hidden
+                  ${isExpanded ? 'border-[#c6ff00]' : 'border-gray-700'}`} // Цвет границы в зависимости от состояния
+      onClick={handleClick} // Раскрытие/сворачивание по клику
     >
       {/* --- Десктопная версия --- */}
-      <div className={`hidden md:block relative transition-all duration-500 ease-in-out ${isExpanded ? 'h-[440px]' : 'h-[92px]'}`}>
-        {/* Развернутый вид */}
-        <div className={`absolute inset-0 transition-opacity duration-500 ${isExpanded ? 'opacity-100' : 'opacity-0'}`}>
-           <div className="flex items-center gap-8 p-4 bg-[#c6ff00] h-full rounded-xl">
-              <div className="flex-1 text-black text-left">
-                  <p className="font-unbounded text-2xl font-bold">{member.name}</p>
-                  <p className="font-unbounded text-xl mt-1">{member.role}</p>
-                  <p className="mt-4 font-bold">{member.description}</p>
+      <div className="hidden md:block">
+        {!isExpanded ? (
+          // Свернутое состояние Десктоп: имя-глаза-должность
+          <div className="p-3 flex items-center justify-between h-[92px] 
+                          transition-colors duration-300 /* Для плавного перехода цветов */
+                          hover:bg-[#c6ff00] hover:text-black"> {/* Ховер эффект: фон желтый, текст черный */}
+              <span className="font-unbounded text-2xl font-bold text-white hover:text-black pl-10">{member.name}</span>
+              <div className="w-[500px] h-[60px] rounded-full overflow-hidden">
+                  <img src={member.eyes} alt={`глаза ${member.name}`} className="w-full h-full object-cover"/>
               </div>
-              <img src={member.photo} alt={member.name} className="w-[400px] h-[400px] object-cover rounded-[30px]"/>
-           </div>
-        </div>
-        {/* Свернутый вид */}
-        <div className={`absolute inset-0 grid grid-cols-[1fr_auto_1fr] items-center gap-5 p-3 transition-opacity duration-500 ${isExpanded ? 'opacity-0' : 'opacity-100'}`}>
-            <span className="font-unbounded text-2xl font-bold text-white pl-10">{member.name}</span>
-            <div className="w-[500px] h-[60px] rounded-full overflow-hidden">
-                <img src={member.eyes} alt={`глаза ${member.name}`} className="w-full h-full object-cover"/>
-            </div>
-            <span className="font-unbounded text-2xl font-bold text-right pr-10 text-white">{member.role}</span>
-        </div>
+              <span className="font-unbounded text-2xl font-bold text-right pr-10 text-white hover:text-black">
+                  {member.role.includes(' ') ? member.role.split(' ').map((word, i) => <React.Fragment key={i}>{word}{i === 0 && <br/>}</React.Fragment>) : member.role}
+              </span>
+          </div>
+        ) : (
+          // Развернутое состояние Десктоп: фото-текст
+          <div className={`p-4 bg-[#c6ff00] text-black rounded-xl h-full flex flex-col justify-between`}>
+              <div className={`flex items-center gap-8 ${isOdd ? 'flex-row-reverse' : 'flex-row'}`}>
+                  {/* Секция имени и должности */}
+                  <div className={`flex-1 flex flex-col justify-center ${isOdd ? 'items-end text-right' : 'items-start text-left'}`}>
+                      <p className="font-unbounded text-2xl font-bold">{member.name}</p>
+                      <p className="font-unbounded text-xl mt-1">
+                          {member.role.includes(' ') ? member.role.split(' ').map((word, i) => <React.Fragment key={i}>{word}{i === 0 && <br/>}</React.Fragment>) : member.role}
+                      </p>
+                  </div>
+                  {/* Секция фото */}
+                  <div className="flex-shrink-0 flex items-center justify-center">
+                      <img src={member.photo} alt={member.name} className="w-40 h-40 object-cover rounded-[30px]"/>
+                  </div>
+              </div>
+              {/* Секция описания под всем */}
+              <p className={`mt-4 text-black font-bold text-base ${isOdd ? 'text-right' : 'text-left'}`}>
+                  {member.description}
+              </p>
+          </div>
+        )}
       </div>
 
       {/* --- Мобильная версия --- */}
-      <div className={`md:hidden p-3 transition-colors duration-500 ${isExpanded ? 'bg-[#c6ff00]' : 'bg-transparent'}`}>
-        {/* Вертикальное центрирование для свернутого вида */}
-        <div className={`flex justify-between items-center transition-opacity h-[72px] ${isExpanded ? 'opacity-0 h-0' : 'opacity-100'}`}>
-            <span className="font-unbounded text-2xl font-bold">{member.name}</span>
-            <div className="w-[140px] h-[50px] rounded-full overflow-hidden">
-                <img src={member.eyes} alt={`глаза ${member.name}`} className="w-full h-full object-cover"/>
-            </div>
-        </div>
-        <div className={`content-wrapper ${isExpanded ? 'open' : ''}`}>
-            <div className="flex flex-col items-center gap-4 pt-4 text-black">
-                <span className="font-unbounded text-2xl font-bold">{member.name}</span>
-                <img src={member.photo} alt={member.name} className="w-40 h-40 object-cover rounded-[30px]"/>
-                <div className="text-center">
-                    <p className="font-unbounded font-bold">{member.role}</p>
-                    <p>{member.description}</p>
-                </div>
-            </div>
-        </div>
+      <div className="md:hidden">
+        {!isExpanded ? (
+          // Свернутое состояние Мобильное: имя-глаза
+          <div className="px-3 py-4 flex items-center justify-between h-[72px]">
+              <span className="font-unbounded text-2xl font-bold text-white">{member.name}</span>
+              <div className="w-[140px] h-[50px] rounded-full overflow-hidden">
+                  <img src={member.eyes} alt={`глаза ${member.name}`} className="w-full h-full object-cover"/>
+              </div>
+          </div>
+        ) : (
+          // Развернутое состояние Мобильное: имя-фото сверху, должность-описание снизу
+          <div className="bg-[#c6ff00] text-black px-4 py-4 rounded-xl">
+              {/* Верхняя строка: Имя (слева) и Фото (справа) */}
+              <div className="flex items-center justify-between gap-4 mb-3">
+                  <span className="font-unbounded text-2xl font-bold flex-grow text-left">{member.name}</span>
+                  <img src={member.photo} alt={member.name} className="w-28 h-28 object-cover rounded-[30px] flex-shrink-0"/>
+              </div>
+              {/* Должность под именем */}
+              <div className="flex flex-col text-left mb-3">
+                  <p className="font-unbounded text-lg">
+                    {member.role.includes(' ') ? member.role.split(' ').map((word, i) => <React.Fragment key={i}>{word}{i === 0 && <br/>}</React.Fragment>) : member.role}
+                  </p>
+              </div>
+              {/* Описание */}
+              <p className="font-text font-bold text-base text-left">{member.description}</p>
+          </div>
+        )}
       </div>
     </div>
   );
@@ -1043,17 +1095,18 @@ const TeamMemberCard = ({ member }: { member: typeof teamMembers[0] }) => {
 
 const Team: React.FC = () => {
   return (
-    <div id="team" className="py-16 md:py-24" style={{ scrollMarginTop: "100px" }}>
+    <div id="team" className="py-16 md:py-24 scroll-mt-[50px]"> {/* Добавлен scroll-mt-[50px] */}
        <div className="container mx-auto px-4">
         <div className="flex flex-col md:flex-row justify-between items-center mb-8 gap-4">
-            <h3 className="text-xl md:text-2xl text-center md:text-left">Знакомьтесь, наши герои!</h3>
+            <h3 className="text-xl md:text-2xl text-center md:text-left text-white">Знакомьтесь, наши герои!</h3>
             <h2 className="text-5xl md:text-7xl font-extrabold text-[#c6ff00] text-center md:text-right">команда</h2>
         </div>
         <div className="flex flex-col gap-4">
-           {teamMembers.map((member, index) => <TeamMemberCard key={index} member={member} />)}
+           {teamMembersData.map((member, index) => <TeamMemberCard key={index} member={member} index={index} />)}
         </div>
         <div className="text-center mt-8">
             <a href="#" className="text-white underline text-lg hover:text-[#c6ff00] transition-colors">Вся команда здесь</a>
+            {/* Placeholder для выпадающего списка команды. Потребуется дополнительная логика и компоненты (например, DropdownMenu). */}
         </div>
        </div>
     </div>
@@ -1081,13 +1134,14 @@ const cards = [
   { title: "НАЧИНАЕМ", text: "В здравоохранении: анализ медицинских изображений, помощь в диагностике и обработка записей.", color: "green" },
   { title: "ЗАПУСКАЕМ", text: "Для промышленности: предиктивное обслуживание (PdM), контроль качества и цифровые двойники.", color: "purple" },
   { title: "ГОТОВЫ", text: "К задачам в телекоме и маркетинге: прогнозируем отток, оптимизируем сети и рекламные кампании.", color: "green" },
-  { title: "ИНТЕГРИРУЕМ", text: "Готовые AI-решения с различными сервисами: CRM, PowerBI, Telegram и другими.", color: "white" },
+  // Добавлен текст "ИИ-ассистенты" в последнюю карточку
+  { title: "ИНТЕГРИРУЕМ", text: "Готовые AI-решения с различными сервисами: CRM, PowerBI, Telegram и другими, а также ИИ-ассистенты.", color: "white" },
 ];
 
 export default function Tech() {
   // ... остальной код компонента без изменений
   return (
-    <section className="bg-[#0B0B0B] text-white py-16 md:py-24">
+    <section className="bg-[#0B0B0B] text-white py-16 md:py-24 scroll-mt-[50px]"> {/* Добавлен scroll-mt-[50px] */}
       <div className="container mx-auto px-4">
         <div className="flex flex-col items-center gap-4 mb-8 md:flex-row md:justify-between md:items-start md:gap-0">
           <h2 className="text-5xl md:text-6xl font-extrabold text-[#DBFE01] text-center md:text-left">используем</h2>
@@ -6581,6 +6635,7 @@ export default NotFound;
 // ... (импорты как в прошлый раз)
 import { useState } from "react";
 import { Phone, Send, MessageCircle, X, Plus } from "lucide-react";
+import axios from 'axios';
 import { useOrder } from "@/context/OrderContext";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { Input } from "@/components/ui/input";
@@ -6589,7 +6644,6 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { toast } from "@/hooks/use-toast";
 
 const Order = () => {
-    // ... (логика как в прошлый раз, но с исправлениями)
     const { close } = useOrder();
     const isMobile = useIsMobile();
     const [loading, setLoading] = useState(false);
@@ -6597,35 +6651,123 @@ const Order = () => {
     const [selectedServices, setSelectedServices] = useState<number[]>([]);
     const [selectedContact, setSelectedContact] = useState<string>("phone");
     const [name, setName] = useState("");
-    const [phone, setPhone] = useState("+7");
+    const [phone, setPhone] = useState("+7"); // Initialize with +7
     const [desc, setDesc] = useState("");
     const [phoneError, setPhoneError] = useState(false);
-    const services = ["сайт", "чат-боты", "ии-агенты", "трейд-бот", "ИИ-по ТЗ", "Другое"];
+    const apiUrl = process.env.REACT_APP_API_URL;
+    // Изменены названия сервисов с заглавной буквы
+    const services = ["Сайт", "Чат-боты", "ИИ-агенты", "Трейд-бот", "ИИ-по ТЗ", "Другое"];
     
     const toggleService = (index: number) => { setSelectedServices((prev) => prev.includes(index) ? prev.filter((i) => i !== index) : [...prev, index]); };
 
+    // Улучшенная функция форматирования номера телефона
     const formatPhone = (input: string) => {
-        const digits = input.replace(/\D/g, "");
-        if (!digits.startsWith('7') && digits.length > 0) return phone; // Блокируем удаление "+7"
-        if (digits.length === 0) return "+7";
+        const digitsOnly = input.replace(/\D/g, ""); // Получаем только цифры
+        let formatted = "+7"; // Всегда начинаем с +7
 
-        const cleaned = digits.slice(0, 11);
-        let result = "+7";
-        if (cleaned.length > 1) result += ` (${cleaned.slice(1, 4)}`;
-        if (cleaned.length > 4) result += `) ${cleaned.slice(4, 7)}`;
-        if (cleaned.length > 7) result += `-${cleaned.slice(7, 9)}`;
-        if (cleaned.length > 9) result += `-${cleaned.slice(9, 11)}`;
-        return result;
+        // Удаляем ведущую '7' или '8' из цифр, если пользователь ввел ее
+        let cleanDigits = digitsOnly;
+        if (cleanDigits.startsWith('7')) {
+            cleanDigits = cleanDigits.substring(1);
+        } else if (cleanDigits.startsWith('8')) {
+            cleanDigits = cleanDigits.substring(1);
+        }
+
+        // Форматируем оставшиеся 10 цифр
+        if (cleanDigits.length > 0) {
+            formatted += " (";
+            if (cleanDigits.length > 0) formatted += cleanDigits.substring(0, Math.min(3, cleanDigits.length));
+            if (cleanDigits.length > 3) formatted += ") " + cleanDigits.substring(3, Math.min(6, cleanDigits.length));
+            if (cleanDigits.length > 6) formatted += "-" + cleanDigits.substring(6, Math.min(8, cleanDigits.length));
+            if (cleanDigits.length > 8) formatted += "-" + cleanDigits.substring(8, Math.min(10, cleanDigits.length));
+        }
+        
+        return formatted;
     };
     
     const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const formatted = formatPhone(e.target.value);
+        const currentInput = e.target.value;
+        const formatted = formatPhone(currentInput);
         setPhone(formatted);
-        if (formatted.replace(/\D/g, "").length === 11) setPhoneError(false);
+        // Валидация: номер должен быть 11 цифр (с учетом +7) или быть пустым (+7)
+        const isElevenDigits = formatted.replace(/\D/g, "").length === 11;
+        const isEmptyButHasPlusSeven = formatted === "+7";
+        setPhoneError(!isElevenDigits && !isEmptyButHasPlusSeven);
     };
 
     const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-      // ... (та же логика отправки)
+      e.preventDefault();
+      setLoading(true);
+
+      const actualPhoneNumber = phone.replace(/\D/g, "");
+      if (actualPhoneNumber.length !== 11) {
+          setPhoneError(true);
+          toast({
+              title: "Ошибка",
+              description: "Пожалуйста, введите полный номер телефона.",
+              variant: "destructive",
+          });
+          setLoading(false);
+          return;
+      }
+
+      if (!agree) {
+          toast({
+              title: "Ошибка",
+              description: "Пожалуйста, согласитесь с политикой конфиденциальности.",
+              variant: "destructive",
+          });
+          setLoading(false);
+          return;
+      }
+
+      // Подготовленные данные для отправки на бэкенд
+      // Эти данные будут доступны бекендеру через переменные состояния React.
+      // const formData = {
+      //     name,
+      //     phone: actualPhoneNumber,
+      //     selectedContact,
+      //     services: selectedServices.map(index => services[index]),
+      //     description: desc,
+      // };
+
+      // console.log("Форма отправлена:", formData);
+      // Здесь должна быть логика отправки на сервер
+      // Пример: fetch('/api/submit-order', { method: 'POST', body: JSON.stringify(formData) })
+      // .then(response => response.json())
+      // .then(data => {
+      //     toast({ title: "Успех!", description: "Ваша заявка отправлена." });
+      //     close();
+      // })
+      // .catch(error => {
+      //     toast({ title: "Ошибка", description: "Что-то пошло не так.", variant: "destructive" });
+      // })
+      // .finally(() => setLoading(false));
+
+      axios.post(`${apiUrl}api/v1/leads/`, {
+          name: name,
+          phone: actualPhoneNumber,
+          contact_method: selectedContact,
+          services: selectedServices.map(index => services[index]),
+          project_description: desc,
+          privacy_policy_agreed: agree
+        }).then(response => {
+            if (response.status === 201) {
+                toast({ title: "Успех!", description: "Ваша заявка отправлена." });
+                close();
+                // Очистка формы после успешной отправки
+                setName("");
+                setPhone("+7");
+                setDesc("");
+                setAgree(false);
+                setSelectedServices([]);
+                setSelectedContact("phone");
+            }
+        }).catch(error => {
+            const status = error.response ? error.response.status : null;
+            alert(`Код ошибки: ${status}, ${error}`);
+        });
+        setLoading(false);
     };
 
   if (isMobile) {
@@ -6659,20 +6801,29 @@ const Order = () => {
                     </div>
                 </div>
 
+                {/* Исправлен ввод номера для мобильной версии */}
                 <div className="flex items-center border-b border-gray-500 focus-within:border-b-[#DBFE01]">
                     <span className="text-lg font-bold pr-2">RU +7</span>
-                    <input required type="tel" placeholder="(999) 999 99-99" value={phone.substring(2)} onChange={handlePhoneChange} className={`bg-transparent w-full py-2 text-lg font-bold focus:outline-none placeholder:text-gray-500 ${phoneError ? "placeholder:text-red-500" : ""}`} />
+                    <input 
+                        required 
+                        type="tel" 
+                        placeholder="(999) 999 99-99" 
+                        value={phone.replace(/^\+7\s?/, '')} // Показываем только цифры после "+7 "
+                        onChange={handlePhoneChange} 
+                        className={`bg-transparent w-full py-2 text-lg font-bold focus:outline-none placeholder:text-gray-500 ${phoneError ? "placeholder:text-red-500" : ""}`} 
+                    />
                 </div>
 
                 <Textarea className="flex-grow min-h-24 resize-none bg-transparent border-0 border-b border-gray-500 rounded-none p-0 text-lg font-bold focus-visible:ring-0 focus-visible:ring-offset-0 focus:border-b-[#DBFE01]" placeholder="Расскажите в двух словах про ваш проект" value={desc} onChange={(e) => setDesc(e.target.value)} />
 
                 <div className="flex items-start gap-3">
                     <Checkbox id="agree-mobile" checked={agree} onCheckedChange={(v) => setAgree(Boolean(v))} className="w-6 h-6 mt-1 border-gray-400 data-[state=checked]:bg-[#DBFE01] data-[state=checked]:text-black"/>
-                    <label htmlFor="agree-mobile" className="text-sm text-gray-400">я согласен с условиями <a href="/policy.pdf" download className="underline text-[#DBFE01] font-bold">политики конфиденциальности</a></label>
+                    {/* Удален download атрибут */}
+                    <label htmlFor="agree-mobile" className="text-sm text-gray-400">я согласен с условиями <a download="policy.pdf" href="/src/assets/policy.pdf" target="_blank" rel="noopener noreferrer" className="underline text-[#DBFE01] font-bold">политики конфиденциальности</a></label>
                 </div>
 
-                <button type="submit" disabled={loading} className="w-full bg-[#DBFE01] text-black rounded-full py-3.5 font-semibold text-lg transition-colors duration-300 hover:bg-lime-300 disabled:bg-gray-500">
-                    {loading ? "Отправляем…" : "отправить"}
+                <button type="submit" disabled={loading || phoneError || !agree} className="w-full bg-[#DBFE01] text-black rounded-full py-3.5 font-semibold text-lg transition-colors duration-300 hover:bg-lime-300 disabled:bg-gray-500">
+                    {loading ? "Отправляем…" : "Отправить"} {/* Капитализация */}
                 </button>
              </form>
         </main>
@@ -6705,15 +6856,24 @@ const Order = () => {
                   </button>
                 ))}
               </div>
-              <Input required type="tel" placeholder="+7 (___) ___-__-__" value={phone} onChange={handlePhoneChange} className={`bg-transparent border-b mb-6 ${phoneError ? "border-red-500" : "border-gray-500" }`} />
+              {/* Исправлен ввод номера для десктопной версии */}
+              <Input 
+                  required 
+                  type="tel" 
+                  placeholder="+7 (___) ___-__-__" 
+                  value={phone} 
+                  onChange={handlePhoneChange} 
+                  className={`bg-transparent border-b mb-6 ${phoneError ? "border-red-500" : "border-gray-500" }`} 
+              />
               <p className="mb-3">Расскажите в двух словах про ваш проект</p>
               <Textarea className="min-h-32 resize-none bg-transparent border border-gray-500 mb-6" placeholder="Короткое описание" value={desc} onChange={(e) => setDesc(e.target.value)} />
               <div className="flex items-center gap-2 mb-6">
                 <Checkbox id="agree-desktop" checked={agree} onCheckedChange={(v) => setAgree(Boolean(v))} />
-                <label htmlFor="agree-desktop" className="text-sm">я согласен с условиями <a href="/policy.pdf" download className="underline">политики конфиденциальности</a></label>
+                {/* Удален download атрибут */}
+                <label htmlFor="agree-desktop" className="text-sm">я согласен с условиями <a download="policy.pdf" href="/src/assets/policy.pdf" target="_blank" rel="noopener noreferrer" className="underline">политики конфиденциальности</a></label>
               </div>
-              <button type="submit" disabled={loading} className="w-full bg-[#DBFE01] text-black rounded-full py-3 font-semibold transition-colors duration-300 hover:bg-lime-300">
-                {loading ? "Отправляем…" : "отправить"}
+              <button type="submit" disabled={loading || phoneError || !agree} className="w-full bg-[#DBFE01] text-black rounded-full py-3 font-semibold transition-colors duration-300 hover:bg-lime-300 disabled:bg-gray-500">
+                {loading ? "Отправляем…" : "Отправить"} {/* Капитализация */}
               </button>
             </form>
         </div>

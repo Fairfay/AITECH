@@ -91,7 +91,7 @@ export default function Portfolio() {
       id="portfolio"
       className="py-16 md:py-24"
       // Уменьшен scrollMarginTop для лучшего позиционирования
-      style={{ scrollMarginTop: "80px" }} 
+      style={{ scrollMarginTop: "50px" }} 
     >
       <div className="container mx-auto px-4">
         {/* Заголовок и подзаголовок */}

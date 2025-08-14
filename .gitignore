@@ -2,3 +2,4 @@ frontend/bun.lockb
 frontend/public/project_snapshot.txt
 frontend/package-lock.json
 frontend/package.json
+frontend/src/project_snapshot.txt

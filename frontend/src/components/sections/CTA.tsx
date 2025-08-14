@@ -4,7 +4,6 @@
 import TelegramIcon from "@/assets/svg/telegram.svg";
 import WhatsappIcon from "@/assets/svg/whatsapp.svg";
 // Удаляем импорты Lucide иконок, так как они больше не используются здесь
-// import { Send, MessageCircle } from "lucide-react"; 
 
 import { useOrder } from "@/context/OrderContext";
 
@@ -41,22 +40,22 @@ const CTA = () => {
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Telegram"
-            // Стили изменены: bg-transparent, hover:bg-[#5940FE], icon-fill-white
+            // Стили для кнопок соцсетей
             className="rounded-full p-4 transition-colors duration-300 bg-transparent hover:bg-[#5940FE] group"
           >
-            {/* Используем новую иконку Telegram. size-8 для увеличения */}
-            <img src={TelegramIcon} alt="Telegram" className="size-8 transition-colors duration-300 group-hover:invert-0 group-hover:brightness-0 group-hover:saturate-100 group-hover:hue-rotate-0 group-hover:sepia-0 group-hover:contrast-0 group-hover:grayscale-0 group-hover:invert" />
+            {/* Используем новую иконку Telegram. size-8 для увеличения, group-hover:invert для белого цвета при наведении */}
+            <img src={TelegramIcon} alt="Telegram" className="size-8 transition-colors duration-300 group-hover:invert" />
           </a>
           <a
             href="https://wa.me/79855551779"
             target="_blank"
             rel="noopener noreferrer"
             aria-label="WhatsApp"
-            // Стили изменены: bg-transparent, hover:bg-[#5940FE], icon-fill-white
+            // Стили для кнопок соцсетей
             className="rounded-full p-4 transition-colors duration-300 bg-transparent hover:bg-[#5940FE] group"
           >
-            {/* Используем новую иконку WhatsApp. size-8 для увеличения */}
-            <img src={WhatsappIcon} alt="WhatsApp" className="size-8 transition-colors duration-300 group-hover:invert-0 group-hover:brightness-0 group-hover:saturate-100 group-hover:hue-rotate-0 group-hover:sepia-0 group-hover:contrast-0 group-hover:grayscale-0 group-hover:invert" />
+            {/* Используем новую иконку WhatsApp. size-8 для увеличения, group-hover:invert для белого цвета при наведении */}
+            <img src={WhatsappIcon} alt="WhatsApp" className="size-8 transition-colors duration-300 group-hover:invert" />
           </a>
         </div>
       </section>
@@ -77,8 +76,8 @@ const CTA = () => {
                     <a href="https://itm-ai.ru" target="_blank" rel="noopener noreferrer" className="hover:underline">ИИ в медицине</a>
                     <a href="https://www.meshalkin.ru/" target="_blank" rel="noopener noreferrer" className="hover:underline">Клиника Мешалкина</a>
                 </div>
-                {/* Удален download атрибут */}
-                <a download="policy.pdf" href="/src/assets/policy.pdf" target="_blank" rel="noopener noreferrer" className="hover:underline">
+                {/* Удален download атрибут, исправлен href */}
+                <a href="/policy.pdf" target="_blank" rel="noopener noreferrer" className="hover:underline">
                     Политика конфиденциальности
                 </a>
             </div>
@@ -98,12 +97,12 @@ const CTA = () => {
               <div className="flex flex-col gap-2 items-start md:items-center">
                 <a href="#services" onClick={(e) => handleScroll(e, "#services")} className="hover:underline">Услуги</a>
                 <a href="#team" onClick={(e) => handleScroll(e, "#team")} className="hover:underline">О нас</a>
-                <a href="#portfolio" onClick={(e) => handleScroll(e, "#portfolio")} className="hover:underline">Портфолио</a>
+                <a href="#portfolio" onClick={(e) => handleScroll(e, "#portfolio")}>Портфолио</a>
                 <a href="#blog" onClick={(e) => handleScroll(e, "#blog")}>Блог</a>
               </div>
               <div className="w-full flex flex-col items-start md:items-end gap-4">
-                 {/* Удален download атрибут */}
-                 <a download="policy.pdf" href="/src/assets/policy.pdf" target="_blank" rel="noopener noreferrer" className="text-sm hover:underline">
+                 {/* Удален download атрибут, исправлен href */}
+                 <a href="/policy.pdf" target="_blank" rel="noopener noreferrer" className="text-sm hover:underline">
                   Политика конфиденциальности
                 </a>
                 <button onClick={open} className="bg-[#d4ff00] hover:bg-[#5940FE] text-black font-bold px-6 py-3 rounded-full transition-colors w-auto">

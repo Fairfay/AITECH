@@ -20,7 +20,7 @@ const cards = [
 export default function Tech() {
   // ... остальной код компонента без изменений
   return (
-    <section className="bg-[#0B0B0B] text-white py-16 md:py-24">
+    <section className="bg-[#0B0B0B] text-white py-16 md:py-24 scroll-mt-[50px]"> {/* Добавлен scroll-mt-[50px] */}
       <div className="container mx-auto px-4">
         <div className="flex flex-col items-center gap-4 mb-8 md:flex-row md:justify-between md:items-start md:gap-0">
           <h2 className="text-5xl md:text-6xl font-extrabold text-[#DBFE01] text-center md:text-left">используем</h2>

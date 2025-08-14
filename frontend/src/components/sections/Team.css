@@ -4,19 +4,22 @@
   font-family: 'Unbounded', sans-serif;
 }
 
-/* Стили для плавно раскрывающегося контента */
+/* Стили для плавно раскрывающегося контента 
 .content-wrapper {
   display: grid;
-  grid-template-rows: 0fr; /* Начальная высота 0 */
-  /* Увеличиваем длительность анимации */
+  grid-template-rows: 0fr;
   transition: grid-template-rows 0.5s ease-in-out;
 }
+*/
 
+/*
 .content-wrapper.open {
-  grid-template-rows: 1fr; /* Конечная высота, чтобы вместить контент */
+  grid-template-rows: 1fr;  Конечная высота, чтобы вместить контент 
 }
+*/
 
-/* Это заставит дочерний элемент правильно сжиматься и расширяться */
+/* Это заставит дочерний элемент правильно сжиматься и расширяться 
 .content-wrapper > div {
     overflow: hidden;
 }
+*/

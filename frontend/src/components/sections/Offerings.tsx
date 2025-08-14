@@ -104,7 +104,7 @@ const Offerings = () => {
   };
 
   return (
-    <section id="services" className="py-16 md:py-24 bg-[#0F0F0F] relative scroll-mt-[80px]"> {/* Добавлен scroll-mt-[80px] */}
+    <section id="services" className="py-16 md:py-24 bg-[#0F0F0F] relative scroll-mt-[50px]"> {/* Добавлен scroll-mt-[50px] */}
       <div className="container mx-auto px-4">
         <div className="flex justify-between items-center mb-12">
           <h2 className="text-4xl md:text-7xl font-extrabold text-[#DBFE01]">

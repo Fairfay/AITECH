@@ -21,8 +21,9 @@ const Order = () => {
     const [phone, setPhone] = useState("+7"); // Initialize with +7
     const [desc, setDesc] = useState("");
     const [phoneError, setPhoneError] = useState(false);
-    const apiUrl = process.env.REACT_APP_API_URL;
-    // Изменены названия сервисов с заглавной буквы
+    // Corrected environment variable access for Vite
+    const apiUrl = import.meta.env.VITE_APP_API_URL; // Using import.meta.env for Vite
+
     const services = ["Сайт", "Чат-боты", "ИИ-агенты", "Трейд-бот", "ИИ-по ТЗ", "Другое"];
     
     const toggleService = (index: number) => { setSelectedServices((prev) => prev.includes(index) ? prev.filter((i) => i !== index) : [...prev, index]); };
@@ -34,13 +35,13 @@ const Order = () => {
 
         // Удаляем ведущую '7' или '8' из цифр, если пользователь ввел ее
         let cleanDigits = digitsOnly;
-        if (cleanDigits.startsWith('7')) {
+        if (cleanDigits.startsWith('7') && cleanDigits.length > 1) { // Only remove if it's not just "7"
             cleanDigits = cleanDigits.substring(1);
-        } else if (cleanDigits.startsWith('8')) {
+        } else if (cleanDigits.startsWith('8') && cleanDigits.length > 1) { // Only remove if it's not just "8"
             cleanDigits = cleanDigits.substring(1);
         }
 
-        // Форматируем оставшиеся 10 цифр
+        // Apply formatting if there are enough digits
         if (cleanDigits.length > 0) {
             formatted += " (";
             if (cleanDigits.length > 0) formatted += cleanDigits.substring(0, Math.min(3, cleanDigits.length));
@@ -71,7 +72,7 @@ const Order = () => {
           setPhoneError(true);
           toast({
               title: "Ошибка",
-              description: "Пожалуйста, введите полный номер телефона.",
+              description: "Пожалуйста, введите полный номер телефона (10 цифр после +7).",
               variant: "destructive",
           });
           setLoading(false);
@@ -88,28 +89,16 @@ const Order = () => {
           return;
       }
 
-      // Подготовленные данные для отправки на бэкенд
-      // Эти данные будут доступны бекендеру через переменные состояния React.
-      // const formData = {
-      //     name,
-      //     phone: actualPhoneNumber,
-      //     selectedContact,
-      //     services: selectedServices.map(index => services[index]),
-      //     description: desc,
-      // };
-
-      // console.log("Форма отправлена:", formData);
-      // Здесь должна быть логика отправки на сервер
-      // Пример: fetch('/api/submit-order', { method: 'POST', body: JSON.stringify(formData) })
-      // .then(response => response.json())
-      // .then(data => {
-      //     toast({ title: "Успех!", description: "Ваша заявка отправлена." });
-      //     close();
-      // })
-      // .catch(error => {
-      //     toast({ title: "Ошибка", description: "Что-то пошло не так.", variant: "destructive" });
-      // })
-      // .finally(() => setLoading(false));
+      // Check if apiUrl is defined before making the request
+      if (!apiUrl) {
+        toast({
+            title: "Ошибка конфигурации",
+            description: "API URL не настроен. Обратитесь к администратору.",
+            variant: "destructive",
+        });
+        setLoading(false);
+        return;
+      }
 
       axios.post(`${apiUrl}api/v1/leads/`, {
           name: name,
@@ -132,9 +121,11 @@ const Order = () => {
             }
         }).catch(error => {
             const status = error.response ? error.response.status : null;
-            alert(`Код ошибки: ${status}, ${error}`);
+            const errorMessage = error.response?.data?.message || error.message || "Неизвестная ошибка.";
+            toast({ title: "Ошибка отправки", description: `Произошла ошибка: ${errorMessage} (Код: ${status || 'N/A'})`, variant: "destructive" });
+        }).finally(() => {
+            setLoading(false);
         });
-        setLoading(false);
     };
 
   if (isMobile) {
@@ -170,14 +161,14 @@ const Order = () => {
 
                 {/* Исправлен ввод номера для мобильной версии */}
                 <div className="flex items-center border-b border-gray-500 focus-within:border-b-[#DBFE01]">
-                    <span className="text-lg font-bold pr-2">RU +7</span>
-                    <input 
+                    <span className="text-lg font-bold pr-2">RU</span>
+                    <Input 
                         required 
                         type="tel" 
-                        placeholder="(999) 999 99-99" 
-                        value={phone.replace(/^\+7\s?/, '')} // Показываем только цифры после "+7 "
+                        placeholder="+7 (___) ___-__-__" 
+                        value={phone} // Display full formatted value
                         onChange={handlePhoneChange} 
-                        className={`bg-transparent w-full py-2 text-lg font-bold focus:outline-none placeholder:text-gray-500 ${phoneError ? "placeholder:text-red-500" : ""}`} 
+                        className={`bg-transparent w-full py-2 text-lg font-bold focus:outline-none placeholder:text-gray-500 ${phoneError ? "placeholder:text-red-500 border-red-500" : ""}`} // Added border-red-500
                     />
                 </div>
 
@@ -185,12 +176,12 @@ const Order = () => {
 
                 <div className="flex items-start gap-3">
                     <Checkbox id="agree-mobile" checked={agree} onCheckedChange={(v) => setAgree(Boolean(v))} className="w-6 h-6 mt-1 border-gray-400 data-[state=checked]:bg-[#DBFE01] data-[state=checked]:text-black"/>
-                    {/* Удален download атрибут */}
-                    <label htmlFor="agree-mobile" className="text-sm text-gray-400">я согласен с условиями <a download="policy.pdf" href="/src/assets/policy.pdf" target="_blank" rel="noopener noreferrer" className="underline text-[#DBFE01] font-bold">политики конфиденциальности</a></label>
+                    {/* Исправлен путь к файлу политики конфиденциальности для продакшена */}
+                    <label htmlFor="agree-mobile" className="text-sm text-gray-400">я согласен с условиями <a href="/policy.pdf" target="_blank" rel="noopener noreferrer" className="underline text-[#DBFE01] font-bold">политики конфиденциальности</a></label>
                 </div>
 
                 <button type="submit" disabled={loading || phoneError || !agree} className="w-full bg-[#DBFE01] text-black rounded-full py-3.5 font-semibold text-lg transition-colors duration-300 hover:bg-lime-300 disabled:bg-gray-500">
-                    {loading ? "Отправляем…" : "Отправить"} {/* Капитализация */}
+                    {loading ? "Отправляем…" : "Отправить"}
                 </button>
              </form>
         </main>
@@ -236,11 +227,11 @@ const Order = () => {
               <Textarea className="min-h-32 resize-none bg-transparent border border-gray-500 mb-6" placeholder="Короткое описание" value={desc} onChange={(e) => setDesc(e.target.value)} />
               <div className="flex items-center gap-2 mb-6">
                 <Checkbox id="agree-desktop" checked={agree} onCheckedChange={(v) => setAgree(Boolean(v))} />
-                {/* Удален download атрибут */}
-                <label htmlFor="agree-desktop" className="text-sm">я согласен с условиями <a download="policy.pdf" href="/src/assets/policy.pdf" target="_blank" rel="noopener noreferrer" className="underline">политики конфиденциальности</a></label>
+                {/* Исправлен путь к файлу политики конфиденциальности для продакшена */}
+                <label htmlFor="agree-desktop" className="text-sm">я согласен с условиями <a href="/policy.pdf" target="_blank" rel="noopener noreferrer" className="underline">политики конфиденциальности</a></label>
               </div>
               <button type="submit" disabled={loading || phoneError || !agree} className="w-full bg-[#DBFE01] text-black rounded-full py-3 font-semibold transition-colors duration-300 hover:bg-lime-300 disabled:bg-gray-500">
-                {loading ? "Отправляем…" : "Отправить"} {/* Капитализация */}
+                {loading ? "Отправляем…" : "Отправить"}
               </button>
             </form>
         </div>
