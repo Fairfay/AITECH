@@ -1,0 +1,33 @@
+@keyframes slideDown {
+  from {
+    height: 0;
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+  to {
+    height: var(--radix-accordion-content-height);
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideUp {
+  from {
+    height: var(--radix-accordion-content-height);
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    height: 0;
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+}
+
+.animate-slideDown {
+  animation: slideDown 0.2s ease forwards;
+}
+
+.animate-slideUp {
+  animation: slideUp 0.2s ease forwards;
+}

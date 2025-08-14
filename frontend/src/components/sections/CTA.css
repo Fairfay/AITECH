@@ -1,0 +1,15 @@
+/* Сдвигаем столбец ссылок вправо */
+.footer-menu {
+  margin-left: 40px; /* регулируешь под нужное смещение */
+}
+
+/* Опционально: делаем аккуратное расстояние между пунктами */
+.footer-menu a {
+  display: block;
+  margin-bottom: 8px;
+}
+
+/* Опционально: при наведении — подчёркивание */
+.unbounded {
+  font-family: 'Unbounded', sans-serif;
+}

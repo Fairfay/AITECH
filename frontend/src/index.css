@@ -1,0 +1,89 @@
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Google Fonts: Unbounded (display) and Raleway (text) */
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;700&family=Unbounded:wght@600;700;800&display=swap');
+
+:root {
+  /* font variables used in tailwind.config & css */
+  --font-display: "Unbounded", sans-serif;
+  --font-text: "Raleway", sans-serif;
+
+  /* existing project tokens (keep if you already have them) */
+  --background: 228 20% 6%;
+  --foreground: 210 40% 98%;
+  --card: 228 20% 8%;
+  --card-foreground: 210 40% 98%;
+  --primary: 68 99% 50%;
+  --primary-foreground: 240 6% 10%;
+  --brand-lime: 68 99% 50%;
+  --brand-purple: 248 99% 62%;
+}
+
+/* keep existing import if you have local fonts file */
+@import url('./styles/fonts.css'); /* optional: if you use local font files */
+
+/* Base rules */
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html, body {
+    @apply bg-background text-foreground antialiased;
+  }
+
+  /* default font for body text */
+  body {
+    font-family: var(--font-text);
+  }
+
+  /* Headings (h1,h2,h3, .text-display etc.) -> Unbounded */
+  h1, h2, h3, .text-display {
+    font-family: var(--font-display);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+  }
+
+  /* Paragraphs and generic text -> Raleway */
+  p, span, li, a, .prose {
+    font-family: var(--font-text);
+  }
+}
+
+/* components and utilities from existing file (keep if present) */
+@layer components {
+  .bg-ambient {
+    background:
+      radial-gradient(1200px 600px at 10% 10%, hsl(var(--brand-lime) / 0.32), transparent 50%),
+      radial-gradient(800px 600px at 70% 60%, hsl(var(--brand-purple) / 0.30), transparent 55%),
+      radial-gradient(600px 400px at 90% 10%, hsl(var(--brand-lime) / 0.18), transparent 60%),
+      hsl(var(--background));
+  }
+
+  .card-surface {
+    @apply bg-card text-card-foreground rounded-3xl border border-border/60 shadow-sm;
+  }
+}
+
+@layer utilities {
+  @keyframes float {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-6px); }
+    100% { transform: translateY(0); }
+  }
+  .animate-float { animation: float 6s ease-in-out infinite; }
+}
+
+/* Фикс для предотвращения "сдвига" контента при открытии модальных окон/меню */
+body[data-radix-scroll-area-hidden] {
+  padding-right: 0 !important;
+}
+
+/* Стили для иконки бургера */
+.burger-icon svg {
+    width: 2rem !important;
+    height: 2rem !important;
+}
