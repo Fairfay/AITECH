@@ -28,7 +28,6 @@ const TeamMemberCard: React.FC<TeamMemberProps> = ({ member, index, isExpanded, 
     onToggle(index);
   };
 
-  // Оборачиваем оба состояния в один div для плавного перехода высоты и фона
   return (
     <div
       className={`rounded-2xl border-2 cursor-pointer overflow-hidden transition-all duration-500 ease-in-out
@@ -50,15 +49,22 @@ const TeamMemberCard: React.FC<TeamMemberProps> = ({ member, index, isExpanded, 
           </div>
         ) : (
           // Развернутое состояние Десктоп
-          <div className="p-6 text-black flex items-center justify-between min-h-[240px]">
-            <p className="font-unbounded text-2xl font-bold flex-1 text-left animate-content-in">{member.name}</p>
-            <div className="flex-shrink-0 flex flex-col items-center gap-2 mx-4">
-              {/* Анимация для фото */}
-              <img src={member.photo} alt={member.name} className="w-40 h-40 object-cover rounded-[30px] animate-content-in" />
-              {/* Анимация для описания */}
-              <p className="mt-2 text-black font-bold text-base text-center max-w-[200px] animate-content-in" style={{ animationDelay: '100ms' }}>{member.description}</p>
+          <div className="p-8 text-black flex items-center justify-between min-h-[340px]">
+            {/* Левая часть: Имя */}
+            <p className="font-unbounded text-3xl font-bold flex-1 text-left animate-content-in">{member.name}</p>
+            
+            {/* Центральная часть: Фотография (увеличена) */}
+            <div className="flex-shrink-0 mx-8">
+              <img src={member.photo} alt={member.name} className="w-64 h-64 object-cover rounded-[40px] animate-content-in" />
             </div>
-            <p className="font-unbounded text-2xl font-bold flex-1 text-right animate-content-in">{member.role}</p>
+
+            {/* Правая часть: Должность и Описание */}
+            <div className="flex-1 flex flex-col items-end animate-content-in">
+                <p className="font-unbounded text-3xl font-bold text-right">{member.role}</p>
+                <p className="mt-3 text-black font-bold text-lg text-right max-w-sm" style={{ animationDelay: '100ms' }}>
+                    {member.description}
+                </p>
+            </div>
           </div>
         )}
       </div>

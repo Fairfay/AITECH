@@ -59,7 +59,7 @@
 .team-card-container.expanded {
   background-color: #c6ff00;
   color: black;
-  height: 250px; /* Высота для десктопа */
+  height: 340px; /* Увеличена высота для десктопа */
 }
 @media (max-width: 767px) {
   .team-card-container.expanded {
