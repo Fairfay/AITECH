@@ -2,6 +2,7 @@
 // ... (импорты как в прошлый раз)
 import { useState } from "react";
 import { Phone, Send, MessageCircle, X, Plus } from "lucide-react";
+import axios from 'axios';
 import { useOrder } from "@/context/OrderContext";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { Input } from "@/components/ui/input";
@@ -20,6 +21,7 @@ const Order = () => {
     const [phone, setPhone] = useState("+7"); // Initialize with +7
     const [desc, setDesc] = useState("");
     const [phoneError, setPhoneError] = useState(false);
+    const apiUrl = process.env.REACT_APP_API_URL;
     // Изменены названия сервисов с заглавной буквы
     const services = ["Сайт", "Чат-боты", "ИИ-агенты", "Трейд-бот", "ИИ-по ТЗ", "Другое"];
     
@@ -88,15 +90,15 @@ const Order = () => {
 
       // Подготовленные данные для отправки на бэкенд
       // Эти данные будут доступны бекендеру через переменные состояния React.
-      const formData = {
-          name,
-          phone: actualPhoneNumber,
-          selectedContact,
-          services: selectedServices.map(index => services[index]),
-          description: desc,
-      };
+      // const formData = {
+      //     name,
+      //     phone: actualPhoneNumber,
+      //     selectedContact,
+      //     services: selectedServices.map(index => services[index]),
+      //     description: desc,
+      // };
 
-      console.log("Форма отправлена:", formData);
+      // console.log("Форма отправлена:", formData);
       // Здесь должна быть логика отправки на сервер
       // Пример: fetch('/api/submit-order', { method: 'POST', body: JSON.stringify(formData) })
       // .then(response => response.json())
@@ -109,18 +111,30 @@ const Order = () => {
       // })
       // .finally(() => setLoading(false));
 
-      setTimeout(() => { // Имитация задержки отправки
-          setLoading(false);
-          toast({ title: "Успех!", description: "Ваша заявка отправлена." });
-          close();
-          // Очистка формы после успешной отправки
-          setName("");
-          setPhone("+7");
-          setDesc("");
-          setAgree(false);
-          setSelectedServices([]);
-          setSelectedContact("phone");
-      }, 1500);
+      axios.post(`${apiUrl}api/v1/leads/`, {
+          name: name,
+          phone: actualPhoneNumber,
+          contact_method: selectedContact,
+          services: selectedServices.map(index => services[index]),
+          project_description: desc,
+          privacy_policy_agreed: agree
+        }).then(response => {
+            if (response.status === 201) {
+                toast({ title: "Успех!", description: "Ваша заявка отправлена." });
+                close();
+                // Очистка формы после успешной отправки
+                setName("");
+                setPhone("+7");
+                setDesc("");
+                setAgree(false);
+                setSelectedServices([]);
+                setSelectedContact("phone");
+            }
+        }).catch(error => {
+            const status = error.response ? error.response.status : null;
+            alert(`Код ошибки: ${status}, ${error}`);
+        });
+        setLoading(false);
     };
 
   if (isMobile) {
