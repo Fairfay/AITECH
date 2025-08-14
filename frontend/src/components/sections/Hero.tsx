@@ -2,7 +2,7 @@
 // ... (импорты)
 import { useOrder } from "@/context/OrderContext";
 import { useIsMobile } from "@/hooks/use-mobile";
-import bgImage from "../../assets/bg.jpg";
+import bgImage from "../../assets/bg.svg";
 import bgImageMobile from "../../assets/bg-mobile.svg";
 import "./Hero.css";
 
@@ -16,7 +16,7 @@ const Hero = () => {
         
         <div className="absolute w-[85%] max-w-[300px] text-center text-base leading-tight 
           top-[33vh] left-1/2 -translate-x-1/2
-          md:w-auto md:max-w-none md:text-left md:left-[15%] md:top-[426px] md:translate-x-0">
+          md:w-auto md-max-w-none md:text-left md:left-[15%] md:top-[426px] md:translate-x-0">
           <p>
             Мы знаем, что такое нейросети и как <br className="hidden md:block"/>
             их использовать для решения задач, <br className="hidden md:block"/>
@@ -24,7 +24,6 @@ const Hero = () => {
           </p>
         </div>
 
-        {/* ... (остальной код Hero без изменений) ... */}
         <h1 className="absolute font-extrabold whitespace-nowrap text-white text-center tracking-wider text-[20vw] leading-[0.85] top-[58%] left-1/2 -translate-x-1/2 -translate-y-1/2 md:text-[12vw] md:leading-normal md:top-auto md:bottom-[-7vw]" style={{ textShadow: "0px 0px 8px rgba(0,0,0,0.5)", WebkitTextStroke: "1px black", paintOrder: "stroke fill" }}>
           {isMobile ? (<>ЭЙАЙ<br/>ТЕХ</>) : 'ЭЙАЙ ТЕХ'}
         </h1>
@@ -36,9 +35,15 @@ const Hero = () => {
           Оставить заявку
         </button>
 
-      <div className="absolute bottom-0 left-0 w-full h-[100px] bg-[#DBFE01] overflow-hidden">
+      {/* Родительский блок теперь с 'flex' для расположения дочерних элементов в ряд */}
+      <div className="absolute bottom-0 left-0 w-full h-[100px] bg-[#DBFE01] overflow-hidden flex">
+        {/* Первый (оригинальный) блок контента */}
         <div className="marquee-content uppercase">
-          <span>сайты</span><span>чат-боты</span><span>ии-агенты</span><span>боты для трейдинга</span><span>комплексные решения с использованием нейросетей под ключ</span><span>сайты</span><span>чат-боты</span><span>ии-агенты</span><span>боты для трейдинга</span><span>комплексные решения с использованием нейросетей под ключ</span>
+          <span>сайты</span><span>чат-боты</span><span>ии-агенты</span><span>боты для трейдинга</span><span>комплексные решения с использованием нейросетей под ключ</span>
+        </div>
+        {/* Второй (дублирующий) блок контента для бесшовности */}
+        <div className="marquee-content uppercase" aria-hidden="true">
+          <span>сайты</span><span>чат-боты</span><span>ии-агенты</span><span>боты для трейдинга</span><span>комплексные решения с использованием нейросетей под ключ</span>
         </div>
       </div>
     </section>
