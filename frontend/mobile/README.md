@@ -1,1 +1,0 @@
-# AITech mobile frontend
