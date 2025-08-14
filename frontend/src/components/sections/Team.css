@@ -4,22 +4,86 @@
   font-family: 'Unbounded', sans-serif;
 }
 
-/* Стили для плавно раскрывающегося контента 
-.content-wrapper {
-  display: grid;
-  grid-template-rows: 0fr;
-  transition: grid-template-rows 0.5s ease-in-out;
-}
+/* 
+  Общий контейнер для карточки.
+  Делаем его 'relative', чтобы абсолютно позиционировать элементы внутри.
+  Добавляем плавный переход для высоты и фона.
 */
+.team-card-container {
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  transition: height 0.6s cubic-bezier(0.65, 0, 0.35, 1), background-color 0.6s ease;
+}
 
-/*
-.content-wrapper.open {
-  grid-template-rows: 1fr;  Конечная высота, чтобы вместить контент 
+/* Элементы внутри карточки (текст, фото) */
+.card-element {
+  position: absolute;
+  will-change: transform, opacity;
+  transition: transform 0.6s cubic-bezier(0.65, 0, 0.35, 1), 
+              opacity 0.5s ease;
 }
-*/
 
-/* Это заставит дочерний элемент правильно сжиматься и расширяться 
-.content-wrapper > div {
-    overflow: hidden;
+/* --- Контейнер для изображения --- */
+.image-morph-wrapper {
+  position: absolute;
+  transform-origin: center center;
+  /* Плавный переход для всех свойств, включая border-radius */
+  transition: all 0.6s cubic-bezier(0.65, 0, 0.35, 1);
 }
-*/
+
+.image-morph-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: opacity 0.4s ease-in-out;
+}
+
+/* Стили для свернутого состояния */
+.team-card-container.collapsed {
+  height: 92px; /* Высота для десктопа */
+  background-color: transparent;
+}
+.team-card-container.collapsed:hover {
+  background-color: #c6ff001a; /* Легкая подсветка при ховере */
+}
+
+/* Стили для мобильной свернутой карточки */
+@media (max-width: 767px) {
+  .team-card-container.collapsed {
+    height: 72px;
+  }
+}
+
+/* --- Стили для развернутого состояния --- */
+.team-card-container.expanded {
+  background-color: #c6ff00;
+  color: black;
+  height: 250px; /* Высота для десктопа */
+}
+@media (max-width: 767px) {
+  .team-card-container.expanded {
+    height: 210px; /* Высота для мобилки */
+  }
+}
+
+/* При разворачивании, "глаза" становятся прозрачными */
+.team-card-container.expanded .eyes-photo {
+  opacity: 0;
+}
+/* А полное фото - видимым */
+.team-card-container.expanded .full-photo {
+  opacity: 1;
+}
+
+/* Скрываем описание по-умолчанию */
+.description-text {
+  opacity: 0;
+  transform: translateY(10px);
+}
+/* Показываем описание в развернутом виде с задержкой */
+.team-card-container.expanded .description-text {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0.15s;
+}

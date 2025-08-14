@@ -28,44 +28,37 @@ const TeamMemberCard: React.FC<TeamMemberProps> = ({ member, index, isExpanded, 
     onToggle(index);
   };
 
+  // Оборачиваем оба состояния в один div для плавного перехода высоты и фона
   return (
     <div
-      className={`team-card-wrapper rounded-2xl border-2 transition-colors duration-300 cursor-pointer overflow-hidden
-                  ${isExpanded ? 'border-[#c6ff00]' : 'border-gray-700'}`} 
-      onClick={handleClick} 
+      className={`rounded-2xl border-2 cursor-pointer overflow-hidden transition-all duration-500 ease-in-out
+                  ${isExpanded ? 'border-[#c6ff00] bg-[#c6ff00]' : 'border-gray-700 bg-transparent'}`}
+      onClick={handleClick}
     >
       {/* --- Десктопная версия --- */}
       <div className="hidden md:block">
         {!isExpanded ? (
-          // Свернутое состояние Десктоп: имя-глаза-должность
-          <div className="p-3 flex items-center justify-between h-[92px] 
-                          transition-colors duration-300 
-                          hover:bg-[#c6ff00] hover:text-black"> 
-              <span className="font-unbounded text-2xl font-bold text-white hover:text-black pl-10">{member.name}</span>
-              <div className="w-[500px] h-[60px] rounded-full overflow-hidden">
-                  <img src={member.eyes} alt={`глаза ${member.name}`} className="w-full h-full object-cover"/>
-              </div>
-              <span className="font-unbounded text-2xl font-bold text-right pr-10 text-white hover:text-black">
-                  {member.role.includes(' ') ? member.role.split(' ').map((word, i) => <React.Fragment key={i}>{word}{i === 0 && <br/>}</React.Fragment>) : member.role}
-              </span>
+          // Свернутое состояние Десктоп
+          <div className="p-3 flex items-center justify-between h-[92px] transition-colors duration-300 hover:bg-[#c6ff0020]">
+            <span className="font-unbounded text-2xl font-bold pl-10">{member.name}</span>
+            <div className="w-[500px] h-[60px] rounded-full overflow-hidden">
+              <img src={member.eyes} alt={`глаза ${member.name}`} className="w-full h-full object-cover" />
+            </div>
+            <span className="font-unbounded text-2xl font-bold text-right pr-10">
+              {member.role.includes(' ') ? member.role.split(' ').map((word, i) => <React.Fragment key={i}>{word}{i === 0 && <br />}</React.Fragment>) : member.role}
+            </span>
           </div>
         ) : (
-          // Развернутое состояние Десктоп: Имя | ФОТО+Описание | Должность
-          <div className="p-6 bg-[#c6ff00] text-black rounded-xl h-full flex items-center justify-between">
-            <div className="flex-1 text-left">
-                <p className="font-unbounded text-2xl font-bold">{member.name}</p>
-            </div>
-    
+          // Развернутое состояние Десктоп
+          <div className="p-6 text-black flex items-center justify-between min-h-[240px]">
+            <p className="font-unbounded text-2xl font-bold flex-1 text-left animate-content-in">{member.name}</p>
             <div className="flex-shrink-0 flex flex-col items-center gap-2 mx-4">
-                <img src={member.photo} alt={member.name} className="w-40 h-40 object-cover rounded-[30px]"/>
-                <p className="mt-2 text-black font-bold text-base text-center max-w-[200px]">{member.description}</p>
+              {/* Анимация для фото */}
+              <img src={member.photo} alt={member.name} className="w-40 h-40 object-cover rounded-[30px] animate-content-in" />
+              {/* Анимация для описания */}
+              <p className="mt-2 text-black font-bold text-base text-center max-w-[200px] animate-content-in" style={{ animationDelay: '100ms' }}>{member.description}</p>
             </div>
-    
-            <div className="flex-1 text-right">
-                <p className="font-unbounded text-2xl font-bold">
-                  {member.role}
-                </p>
-            </div>
+            <p className="font-unbounded text-2xl font-bold flex-1 text-right animate-content-in">{member.role}</p>
           </div>
         )}
       </div>
@@ -73,31 +66,27 @@ const TeamMemberCard: React.FC<TeamMemberProps> = ({ member, index, isExpanded, 
       {/* --- Мобильная версия --- */}
       <div className="md:hidden">
         {!isExpanded ? (
-          // Свернутое состояние Мобильное: имя-глаза
+          // Свернутое состояние Мобильное
           <div className="px-3 py-4 flex items-center justify-between h-[72px]">
-              <span className="font-unbounded text-2xl font-bold text-white">{member.name}</span>
-              <div className="w-[140px] h-[50px] rounded-full overflow-hidden">
-                  <img src={member.eyes} alt={`глаза ${member.name}`} className="w-full h-full object-cover"/>
-              </div>
+            <span className="font-unbounded text-2xl font-bold text-white">{member.name}</span>
+            <div className="w-[140px] h-[50px] rounded-full overflow-hidden">
+              <img src={member.eyes} alt={`глаза ${member.name}`} className="w-full h-full object-cover" />
+            </div>
           </div>
         ) : (
           // Развернутое состояние Мобильное
-          <div className="bg-[#c6ff00] text-black p-4 rounded-xl flex flex-col gap-4">
-            {/* Верхний блок: инфо и фото */}
+          <div className="text-black p-4 flex flex-col gap-4 animate-content-in">
             <div className="flex items-start justify-between gap-4">
-                {/* Левая часть: Имя и Должность */}
-                <div className="flex flex-col text-left">
-                    <p className="font-unbounded text-2xl font-bold">{member.name}</p>
-                    <p className="font-unbounded text-lg mt-1">
-                      {member.role.includes(' ') ? member.role.split(' ').map((word, i) => <React.Fragment key={i}>{word}{i === 0 && <br/>}</React.Fragment>) : member.role}
-                    </p>
-                </div>
-                {/* Правая часть: Фото */}
-                <img src={member.photo} alt={member.name} className="w-28 h-28 object-cover rounded-[30px] flex-shrink-0"/>
+              <div className="flex flex-col text-left">
+                <p className="font-unbounded text-2xl font-bold">{member.name}</p>
+                <p className="font-unbounded text-lg mt-1">
+                  {member.role.includes(' ') ? member.role.split(' ').map((word, i) => <React.Fragment key={i}>{word}{i === 0 && <br />}</React.Fragment>) : member.role}
+                </p>
+              </div>
+              <img src={member.photo} alt={member.name} className="w-28 h-28 object-cover rounded-[30px] flex-shrink-0" />
             </div>
-            {/* Нижний блок: Описание (без рамки) */}
             <div className="text-left">
-                <p className="font-text font-bold text-base">{member.description}</p>
+              <p className="font-text font-bold text-base">{member.description}</p>
             </div>
           </div>
         )}
