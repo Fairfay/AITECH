@@ -20,7 +20,7 @@ const faqs = [
 
 const FAQ = () => {
   return (
-    <section id="faq" className="py-16 md:py-24 scroll-mt-[50px]"> {/* Добавлен scroll-mt-[50px] */}
+    <section id="faq" className="py-16 md:py-24 scroll-mt-[20px]"> {/* Добавлен scroll-mt-[50px] */}
       <div className="container mx-auto px-4">
         <h2 className="text-6xl md:text-8xl font-extrabold text-[#c6ff00] mb-12 text-center">
           FAQ

@@ -135,7 +135,7 @@ const Team: React.FC = () => {
   const hiddenMembers = teamMembersData.slice(3);
 
   return (
-    <div id="team" className="py-16 md:py-24 scroll-mt-[50px]">
+    <div id="team" className="py-16 md:py-24 scroll-mt-[20px]">
        <div className="container mx-auto px-4">
         <div className="flex flex-col md:flex-row justify-between items-center mb-8 gap-4">
             <h3 className="text-xl md:text-2xl text-center md:text-left text-white">Знакомьтесь, наши герои!</h3>

@@ -19,7 +19,7 @@ const posts = [
 ];
 
 const Blog = () => (
-  <section id="blog" className="py-16 md:py-24 scroll-mt-[50px]"> {/* Добавлен scroll-mt-[50px] */}
+  <section id="blog" className="py-16 md:py-24 scroll-mt-[20px]"> {/* Добавлен scroll-mt-[50px] */}
     <div className="container mx-auto px-4">
       <div className="flex flex-col md:flex-row items-center md:items-start justify-between gap-6 mb-8 text-center md:text-left">
         <h2 className="text-display text-5xl md:text-7xl font-extrabold text-[#c6ff00]">блог</h2>

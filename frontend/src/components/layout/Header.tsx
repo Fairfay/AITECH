@@ -50,9 +50,9 @@ const Header = () => {
               </SheetHeader>
               <div className="flex flex-col gap-6 text-xl font-medium">
                 {/* Меняем местами О нас и Услуги */}
+                <a href="#portfolio" onClick={(e) => handleScroll(e, "#portfolio")}>Портфолио</a>
                 <a href="#services" onClick={(e) => handleScroll(e, "#services")}>Услуги</a>
                 <a href="#team" onClick={(e) => handleScroll(e, "#team")}>О нас</a>
-                <a href="#portfolio" onClick={(e) => handleScroll(e, "#portfolio")}>Портфолио</a>
                 <a href="#blog" onClick={(e) => handleScroll(e, "#blog")}>Блог</a>
                 <a href="#contacts" onClick={(e) => handleScroll(e, "#contacts")}>Контакты</a>
               </div>
