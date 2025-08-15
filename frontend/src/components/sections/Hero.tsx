@@ -1,5 +1,3 @@
-// src/components/sections/Hero.tsx
-// ... (импорты)
 import { useOrder } from "@/context/OrderContext";
 import { useIsMobile } from "@/hooks/use-mobile";
 import bgImage from "../../assets/bg.svg";
@@ -12,7 +10,11 @@ const Hero = () => {
   const background = isMobile ? bgImageMobile : bgImage;
 
   return (
-    <section id="hero" className="relative h-screen min-h-[700px] pt-[80px] overflow-hidden bg-cover bg-center text-white scroll-mt-[20px]" style={{ backgroundImage: `url(${background})`, backgroundAttachment: isMobile ? "fixed" : "scroll" }}>
+    <section 
+      id="hero" 
+      className="relative h-screen min-h-[700px] pt-[80px] overflow-hidden bg-cover bg-center text-white scroll-mt-[20px]" 
+      style={{ backgroundImage: `url(${background})`, backgroundAttachment: isMobile ? "scroll" : "fixed" }}
+    >
         
         <div className="absolute w-[85%] max-w-[300px] text-center text-base leading-tight 
           top-[33vh] left-1/2 -translate-x-1/2
