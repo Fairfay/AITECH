@@ -6,11 +6,12 @@ from application.models import Lead
 @admin.register(Lead)
 class LeadAdmin(admin.ModelAdmin):
     list_display = (
-        "id",
+#        "id",
         "name",
         "contact_method",
         "phone",
-        "privacy_policy_agreed",
+#       "privacy_policy_agreed",
+        "services",
         "created_at",
         "sent_to_amocrm",
         "sent_to_telegram"
