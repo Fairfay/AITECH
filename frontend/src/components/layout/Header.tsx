@@ -50,8 +50,8 @@ const Header = () => {
               </SheetHeader>
               <div className="flex flex-col gap-6 text-xl font-medium">
                 {/* Меняем местами О нас и Услуги */}
-                <a href="#team" onClick={(e) => handleScroll(e, "#team")}>О нас</a>
                 <a href="#services" onClick={(e) => handleScroll(e, "#services")}>Услуги</a>
+                <a href="#team" onClick={(e) => handleScroll(e, "#team")}>О нас</a>
                 <a href="#portfolio" onClick={(e) => handleScroll(e, "#portfolio")}>Портфолио</a>
                 <a href="#blog" onClick={(e) => handleScroll(e, "#blog")}>Блог</a>
                 <a href="#contacts" onClick={(e) => handleScroll(e, "#contacts")}>Контакты</a>
@@ -71,8 +71,8 @@ const Header = () => {
          {/* ... (код десктопного хедера без изменений) ... */}
           <div className="flex items-center gap-2">
             {/* Меняем местами О нас и Услуги */}
-            <Button variant="pill" asChild><a href="#team" aria-label="О нас" onClick={(e) => handleScroll(e, "#team")}>О нас</a></Button>
             <Button variant="pill" asChild><a href="#services" aria-label="Услуги" onClick={(e) => handleScroll(e, "#services")}>Услуги</a></Button>
+            <Button variant="pill" asChild><a href="#team" aria-label="О нас" onClick={(e) => handleScroll(e, "#team")}>О нас</a></Button>
             <Button variant="pill" asChild><a href="#blog" aria-label="Блог" onClick={(e) => handleScroll(e, "#blog")}>Блог</a></Button>
           </div>
           <a href="#hero" onClick={(e) => handleScroll(e, "#hero")} className="ml-20 cursor-pointer"><LogoTag /></a>
