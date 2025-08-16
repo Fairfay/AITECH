@@ -18,8 +18,8 @@ const CTA = () => {
 
   return (
     <>
-      {/* Жёлто-зелёный блок */}
-      <section className="bg-[#d4ff00] py-16 text-center">
+      {/* ИЗМЕНЕНИЕ: Добавлен id="cta-section" для возможности точного скролла */}
+      <section id="cta-section" className="bg-[#d4ff00] py-16 text-center">
         <h2 className="text-4xl md:text-6xl font-extrabold text-black leading-tight px-4">
           пора{' '}
           {/* Текст "внедрять ии" теперь кнопка, открывающая модальное окно */}

@@ -19,6 +19,7 @@ const Header = () => {
   const isMobile = useIsMobile();
   const [isSheetOpen, setSheetOpen] = useState(false);
 
+  // ИЗМЕНЕНИЕ: Добавлена логика для центрирования при клике на "Контакты" в мобильной версии
   const handleScroll = (
     e: React.MouseEvent<HTMLAnchorElement>,
     id: string
@@ -26,7 +27,16 @@ const Header = () => {
     e.preventDefault();
     setSheetOpen(false);
     setTimeout(() => {
-      document.querySelector(id)?.scrollIntoView({ behavior: "smooth" });
+      const element = document.querySelector(id);
+      if (element) {
+        // Если это ссылка на секцию CTA в мобильной версии, скроллим к центру
+        if (id === '#cta-section' && isMobile) {
+          element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        } else {
+          // Стандартное поведение для всех остальных ссылок
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
+      }
     }, 300);
   };
     
@@ -54,7 +64,8 @@ const Header = () => {
                 <a href="#services" onClick={(e) => handleScroll(e, "#services")}>Услуги</a>
                 <a href="#team" onClick={(e) => handleScroll(e, "#team")}>О нас</a>
                 <a href="#blog" onClick={(e) => handleScroll(e, "#blog")}>Блог</a>
-                <a href="#contacts" onClick={(e) => handleScroll(e, "#contacts")}>Контакты</a>
+                {/* ИЗМЕНЕНИЕ: Ссылка теперь ведет на #cta-section для запуска кастомного скролла */}
+                <a href="#cta-section" onClick={(e) => handleScroll(e, "#cta-section")}>Контакты</a>
               </div>
             </SheetContent>
           </Sheet>
@@ -78,6 +89,7 @@ const Header = () => {
           <a href="#hero" onClick={(e) => handleScroll(e, "#hero")} className="ml-20 cursor-pointer"><LogoTag /></a>
           <div className="flex items-center gap-2">
             <Button variant="pill" asChild><a href="#portfolio" aria-label="Портфолио" onClick={(e) => handleScroll(e, "#portfolio")}>Портфолио</a></Button>
+            {/* На десктопе ссылка "Контакты" по-прежнему ведет на футер */}
             <Button variant="pill" asChild><a href="#contacts" aria-label="Контакты" onClick={(e) => handleScroll(e, "#contacts")}>Контакты</a></Button>
             <Button variant="cta" onClick={openOrderModal}>Хочу проект</Button>
           </div>
